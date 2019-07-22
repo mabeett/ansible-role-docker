@@ -6,18 +6,13 @@
       - docker-engine
     state: absent
 
-- name: Determine if gnupg is installed
-  apt:
-    name: gnupg
-    state: present
-  check_mode: true
+- name: Check if gnupg is present
+  shell: dpkg --get-selections | grep gnupg
   register: state_gnupg
+  ignore_errors: true
 
-- name: Determine if gnupg1 is installed
-  apt:
-    name: gnupg1
-    state: present
-  check_mode: true
+- name: Check if gnupg1 is present
+  shell: dpkg --get-selections | grep gnupg1
   register: state_gnupg1
   ignore_errors: true
 
